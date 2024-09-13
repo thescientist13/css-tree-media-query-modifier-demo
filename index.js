@@ -1,18 +1,15 @@
 import { parse, walk } from 'css-tree';
 
+// https://developer.mozilla.org/en-US/docs/Web/CSS/@media#syntax
 const contents = `
-  @media screen and (max-width: 992px) {
-    body {
-      background-color: blue;
+  @media screen and (min-width: 900px) {
+    article {
+      padding: 1rem 3rem;
     }
   }
 `;
 
-const ast = parse(contents, {
-  onParseError(error) {
-    console.log(error.formattedMessage);
-  }
-});
+const ast = parse(contents);
 
 walk(ast, {
   enter: function (node, item) {
